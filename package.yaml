@@ -25,6 +25,9 @@ dependencies:
 
 library:
   source-dirs: src
+  exposed-modules:
+  - Lib
+  - E14
 
 executables:
   learn-exe:
@@ -49,3 +52,4 @@ tests:
     dependencies:
     - learn
     - time
+    - hspec
