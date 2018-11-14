@@ -2,9 +2,9 @@ name:                learn
 version:             0.1.0.0
 github:              "githubuser/learn"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2018 Author name here"
+author:              "Even Brenden"
+maintainer:          "evenbrenden@gmail.com"
+copyright:           "2018 Even Brenden"
 
 extra-source-files:
 - README.md
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/learn#readme>
+description:         http://haskellbook.com/
 
 dependencies:
 - base >= 4.7 && < 5
@@ -27,7 +27,9 @@ library:
   source-dirs: src
   exposed-modules:
   - Lib
-  - E14
+  - E8
+  dependencies:
+  - time
 
 executables:
   learn-exe:
@@ -39,7 +41,6 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - learn
-    - time
 
 tests:
   learn-test:
@@ -51,5 +52,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - learn
-    - time
     - hspec

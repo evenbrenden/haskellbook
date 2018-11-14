@@ -1,4 +1,4 @@
-module ExercisesCh7 where
+module E7 where
 
 -- Grab Bag --
 

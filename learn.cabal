@@ -2,16 +2,16 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0a68e164972e7ea6a49d8091ac5a1310ec841b49a5c5d398a86fdb48117a8c93
+-- hash: 4a4263de6962cba077e85975ae0c08d8234ee87ecf1e44c38d4496cc7a6b97a0
 
 name:           learn
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/learn#readme>
+description:    http://haskellbook.com/
 homepage:       https://github.com/githubuser/learn#readme
 bug-reports:    https://github.com/githubuser/learn/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2018 Author name here
+author:         Even Brenden
+maintainer:     evenbrenden@gmail.com
+copyright:      2018 Even Brenden
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -27,7 +27,7 @@ source-repository head
 library
   exposed-modules:
       Lib
-      E14
+      E8
   other-modules:
       Paths_learn
   hs-source-dirs:

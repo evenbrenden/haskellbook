@@ -1,4 +1,4 @@
-module ExercisesCh8 where
+module E8 (multi) where
 
 import Data.List (intersperse)
 

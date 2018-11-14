@@ -1,5 +1,5 @@
 import Test.Hspec
-import E14
+import E8
 
 -- E14: Intermission: Short Exercise --
 

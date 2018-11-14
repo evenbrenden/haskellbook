@@ -1,6 +1,6 @@
 module Lib
-    ( someFunc
+    ( book
     ) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+book :: IO ()
+book = putStrLn "haskellbook.com"

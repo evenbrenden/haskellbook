@@ -1,4 +1,4 @@
-module ExercisesCh10 where
+module E10 where
 
 import Data.Time
 

@@ -1,6 +1,6 @@
 -- {-# LANGUAGE NoMonomorphismRestriction #-}
 
-module ExercisesCh1to5 where
+module E1To5 where
 
 -- 2.10
 

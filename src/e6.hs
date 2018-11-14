@@ -1,4 +1,4 @@
-module ExercisesCh6 where
+module E6 where
 
 -- 6.1
 
