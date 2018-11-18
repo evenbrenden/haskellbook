@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4a4263de6962cba077e85975ae0c08d8234ee87ecf1e44c38d4496cc7a6b97a0
+-- hash: 8660cd6340f820c56cfc38497b4080f25edafbe9cf25e443b363f0dd0c4f47b9
 
 name:           learn
 version:        0.1.0.0
@@ -54,6 +54,8 @@ test-suite learn-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      MultiplicationSpec
+      WordNumberSpec
       Paths_learn
   hs-source-dirs:
       test
@@ -61,6 +63,7 @@ test-suite learn-test
   build-depends:
       base >=4.7 && <5
     , hspec
+    , hspec-discover
     , learn
     , time
   default-language: Haskell2010

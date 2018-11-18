@@ -1,4 +1,11 @@
-module E8 (multi) where
+module E8
+  (
+    multi
+  , digitToWord
+  , digits
+  , wordNumber
+  )
+  where
 
 import Data.List (intersperse)
 

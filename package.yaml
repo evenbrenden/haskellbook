@@ -53,3 +53,4 @@ tests:
     dependencies:
     - learn
     - hspec
+    - hspec-discover
