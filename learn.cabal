@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8660cd6340f820c56cfc38497b4080f25edafbe9cf25e443b363f0dd0c4f47b9
+-- hash: 794a0dafd5d7cc5541884e1a5d931084c7be6a395e411da00743b4c3bbdc7ce9
 
 name:           learn
 version:        0.1.0.0
@@ -54,6 +54,7 @@ test-suite learn-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      E14Spec
       MultiplicationSpec
       WordNumberSpec
       Paths_learn
@@ -61,7 +62,8 @@ test-suite learn-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      QuickCheck
+    , base >=4.7 && <5
     , hspec
     , hspec-discover
     , learn

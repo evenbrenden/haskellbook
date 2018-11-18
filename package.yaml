@@ -54,3 +54,4 @@ tests:
     - learn
     - hspec
     - hspec-discover
+    - QuickCheck
