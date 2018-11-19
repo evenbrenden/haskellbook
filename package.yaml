@@ -28,6 +28,7 @@ library:
   exposed-modules:
   - Lib
   - E8
+  - E11
   dependencies:
   - time
 

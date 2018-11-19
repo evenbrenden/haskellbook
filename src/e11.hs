@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE FlexibleInstances #-}
 
-module E11 where
+module E11 (capitalizeWord) where
 
 import Data.Char
 
@@ -254,12 +254,9 @@ isSubseqOf ax@(a:as) (b:bs) =
   else isSubseqOf ax bs
 
 -- Not using @ but this is pretty smooth anyway --
-capitalizeChar :: Char -> Char
-capitalizeChar a = chr ((ord a) - 32)
-
 capitalizeWord :: String -> String
 capitalizeWord [] = []
-capitalizeWord (a:as) = (capitalizeChar a) : as
+capitalizeWord (a:as) = (toUpper a) : as
 
 capWordTuples :: [String] -> [(String, String)]
 capWordTuples [] = []
@@ -275,7 +272,7 @@ capitalizeParagraph s = go s True -- Starting with the flag set covers the first
   where
     go ('.':xs) _ = '.' : (go xs) True -- Set flag when we hit a period
     go (x:xs) True = case isAlpha x of -- When the flag is set we look for something to capitalize
-        True -> (capitalizeChar x) : (go xs False) -- If the current char is alphanumberic we capitalize it and unset flag
+        True -> (toUpper x) : (go xs False) -- If the current char is alphanumberic we capitalize it and unset flag
         False -> x : (go xs True) -- If it isnt we pass through but keep the flag set
     go (x:xs) False = x : (go xs False) -- When the flag is not set we just pass through
     go xs _ = xs -- End of string

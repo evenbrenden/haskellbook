@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 794a0dafd5d7cc5541884e1a5d931084c7be6a395e411da00743b4c3bbdc7ce9
+-- hash: 22b4fc3b3e533936e082bdd564e0d1211b3c8cde9c2c907774fad692e73a0be1
 
 name:           learn
 version:        0.1.0.0
@@ -28,6 +28,7 @@ library
   exposed-modules:
       Lib
       E8
+      E11
   other-modules:
       Paths_learn
   hs-source-dirs:
@@ -54,8 +55,9 @@ test-suite learn-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      E14Spec
+      IdempotenceSpec
       MultiplicationSpec
+      UsingQuickCheckSpec
       WordNumberSpec
       Paths_learn
   hs-source-dirs:
