@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 22b4fc3b3e533936e082bdd564e0d1211b3c8cde9c2c907774fad692e73a0be1
+-- hash: 4cfabb764777e1c603ac27b7923396169f23a1a0b2696bb2cf59e602e7e2cc9a
 
 name:           learn
 version:        0.1.0.0
@@ -34,7 +34,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      QuickCheck
+    , base >=4.7 && <5
     , time
   default-language: Haskell2010
 

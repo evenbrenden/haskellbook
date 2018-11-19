@@ -31,6 +31,7 @@ library:
   - E11
   dependencies:
   - time
+  - QuickCheck
 
 executables:
   learn-exe:
