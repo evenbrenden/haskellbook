@@ -29,6 +29,7 @@ library:
   - Lib
   - E8
   - E11
+  - Fool
   dependencies:
   - time
   - QuickCheck

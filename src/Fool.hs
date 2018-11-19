@@ -16,4 +16,5 @@ foolGenUnequal = frequency [(2, return Fulse), (1, return Frue)]
 instance Arbitrary Fool where
   arbitrary = foolGenUnequal
 
--- sample (arbitrary :: Gen Fool)
+whatAFoolBelieves :: IO ()
+whatAFoolBelieves = sample (arbitrary :: Gen Fool)
