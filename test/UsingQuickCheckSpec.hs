@@ -54,25 +54,25 @@ spec = do
       property $ \x -> halfIdentity x == (x :: Double)
   describe "listOrdered" $ do
     it "sorted list is ordered" $ do
-      property $ \x -> (listOrdered . sort) (x :: [Int])
+      property ((listOrdered . sort) :: [Int] -> Bool)
   describe "plusAssociative" $ do
     it "addition is associative" $ do
-      property $ \x y z -> plusAssociative (x :: Int) (y :: Int) (z :: Int)
+      property (plusAssociative :: Int -> Int -> Int -> Bool)
   describe "plusCommutative" $ do
     it "addition is commutative" $ do
-      property $ \x y -> plusCommutative (x :: Int) (y :: Int)
+      property (plusCommutative :: Int -> Int -> Bool)
   describe "multiAssociative" $ do
     it "multiplication is associative" $ do
-      property $ \x y z -> multiAssociative (x :: Int) (y :: Int) (z :: Int)
+      property (multiAssociative :: Int -> Int -> Int -> Bool)
   describe "multiCommutative" $ do
     it "multiplication is commutative" $ do
-      property $ \x y -> multiCommutative (x :: Int) (y :: Int)
+      property (multiCommutative :: Int -> Int -> Bool)
   describe "quotRemProp" $ do
     it "quot and rem should work like quotRemProp" $ do
-      property $ \x y -> quotRemProp (x :: Int) (y :: Int)
+      property (quotRemProp :: Int -> Int -> Bool)
   describe "divModProp" $ do
     it "div and mod should work like divModProp" $ do
-      property $ \x y -> divModProp (x :: Int) (y :: Int)
+      property (divModProp :: Int -> Int -> Bool)
   -- describe "expAssociative" $ do
   --   it "of course not" $ do
   --     property $ \x y z -> expAssociative (x :: Int) (y :: Int) (z :: Int)
