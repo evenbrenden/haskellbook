@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6df48b5c831887fb3e32f0cfe424e8d3e70913e365b95fb55c08a6485db3515b
+-- hash: 6f54a08fb4f10ff9b3ffc6265213aefa9548c8a54cad80adddbd3d13f103f090
 
 name:           learn
 version:        0.1.0.0
@@ -30,7 +30,11 @@ library
       E8
       E11
       Fool
+      MonoidQuickCheckHelpers
+      Optional
   other-modules:
+      MaybeAnotherMonoid
+      TestingQuickChecksPatience
       Paths_learn
   hs-source-dirs:
       src

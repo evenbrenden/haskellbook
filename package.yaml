@@ -30,6 +30,8 @@ library:
   - E8
   - E11
   - Fool
+  - MonoidQuickCheckHelpers
+  - Optional
   dependencies:
   - time
   - QuickCheck
