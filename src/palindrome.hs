@@ -1,5 +1,7 @@
 module Palindrome where
 
+-- Chapter 4
+
 import Control.Monad
 import System.Exit (exitSuccess)
 import Data.Char

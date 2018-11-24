@@ -1,5 +1,7 @@
 module Fool where
 
+-- Chapter 14
+
 import Test.QuickCheck
 
 data Fool =

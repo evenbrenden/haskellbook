@@ -1,4 +1,4 @@
--- ch3_8 "Building functions" 6
+-- Chapter 3
 
 module Reverse where
 
