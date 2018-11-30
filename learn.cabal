@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6f54a08fb4f10ff9b3ffc6265213aefa9548c8a54cad80adddbd3d13f103f090
+-- hash: 376bb856c0ed851b4d8139378109f7eeb1ec2b5a8589fb85131df12fa2ad83c2
 
 name:           learn
 version:        0.1.0.0
@@ -30,7 +30,7 @@ library
       E8
       E11
       Fool
-      MonoidQuickCheckHelpers
+      MonoidSemigroupHelpers
       Optional
   other-modules:
       MaybeAnotherMonoid

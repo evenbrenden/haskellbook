@@ -5,7 +5,7 @@ module TestingQuickChecksPatience where
 import Data.Semigroup
 import Data.Monoid
 import Test.QuickCheck
-import MonoidQuickCheckHelpers
+import MonoidSemigroupHelpers
 
 data Bull =
     Fools

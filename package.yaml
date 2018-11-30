@@ -30,7 +30,7 @@ library:
   - E8
   - E11
   - Fool
-  - MonoidQuickCheckHelpers
+  - MonoidSemigroupHelpers
   - Optional
   dependencies:
   - time

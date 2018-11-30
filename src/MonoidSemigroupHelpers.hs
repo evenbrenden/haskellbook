@@ -1,8 +1,14 @@
-module MonoidQuickCheckHelpers where
+module MonoidSemigroupHelpers where
 
 -- Chapter 15
 
 import Data.Monoid
+import Data.Semigroup
+
+semigroupAssoc :: (Eq m, Semigroup m)
+               => m -> m -> m -> Bool
+semigroupAssoc a b c =
+  (a <> (b <> c)) == ((a <> b) <> c)
 
 monoidAssoc :: (Eq m, Monoid m)
             => m -> m -> m -> Bool

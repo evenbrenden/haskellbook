@@ -5,7 +5,7 @@ module MaybeAnotherMonoid where
 import Data.Semigroup
 import Data.Monoid
 import Test.QuickCheck
-import MonoidQuickCheckHelpers
+import MonoidSemigroupHelpers
 import Optional
 
 newtype First' a =
