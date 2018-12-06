@@ -59,7 +59,7 @@ instance Monoid Trivial where
   mempty = Trivial
   mappend = (<>)
 
--- Identity (Need a (Monoid a), right?)
+-- Identity
 
 newtype Identity a = Identity a deriving (Eq, Show)
 
@@ -72,7 +72,7 @@ instance Arbitrary a => Arbitrary (Identity a)  where
 instance Monoid a => Monoid (Identity a) where
   mempty = (Identity mempty)
 
--- Two (Need a (Monoid a), right?)
+-- Two
 
 data Two a b = Two a b deriving (Eq, Show)
 
@@ -183,7 +183,7 @@ instance (Arbitrary a, Arbitrary b) => Arbitrary (Or a b)  where
     b <- arbitrary
     oneof [ return $ Fst a, return $ Snd b ]
 
--- Combine (Eq and Show not possible, right?)
+-- Combine
 
 newtype Combine a b =
   Combine { unCombine :: (a -> b) }
@@ -218,7 +218,7 @@ monoidRightIdentityCombine :: (Eq b, Monoid b)
                            -> Bool
 monoidRightIdentityCombine x i = unCombine (x <> mempty) i == unCombine x i
 
--- Comp (Eq and Show not possible, right?)
+-- Comp
 
 newtype Comp a =
   Comp { unComp :: (a -> a) }
@@ -284,7 +284,7 @@ validation = do
   print $ success 1 <> success 2
   print $ failure "woot" <> success 2
 
--- Mem (Eq and Show not possible, right?)
+-- Mem
 
 newtype Mem s a =
   Mem {
