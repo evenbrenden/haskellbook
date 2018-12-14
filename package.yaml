@@ -35,6 +35,7 @@ library:
   dependencies:
   - time
   - QuickCheck
+  - checkers
 
 executables:
   learn-exe:
