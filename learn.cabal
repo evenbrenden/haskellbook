@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5be875d76b35dc534b301e0d7a4b3bf5a8bfd01b02c151873ca4913950cc2646
+-- hash: a4d987c07a9ac867b129787fc971b14b7a69c006c2ca6a88a8d47e042bbb747d
 
 name:           learn
 version:        0.1.0.0
@@ -42,6 +42,7 @@ library
       QuickCheck
     , base >=4.7 && <5
     , checkers
+    , scotty
     , time
   default-language: Haskell2010
 

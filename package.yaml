@@ -36,6 +36,7 @@ library:
   - time
   - QuickCheck
   - checkers
+  - scotty
 
 executables:
   learn-exe:
