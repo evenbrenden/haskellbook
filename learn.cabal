@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a4d987c07a9ac867b129787fc971b14b7a69c006c2ca6a88a8d47e042bbb747d
+-- hash: ef75f7c170969d1bb94399c44c04afd77abc4fd6f831313e8dee8532bfe038a1
 
 name:           learn
 version:        0.1.0.0
@@ -38,6 +38,10 @@ library
       Paths_learn
   hs-source-dirs:
       src
+      src/ch8
+      src/ch11
+      src/ch14
+      src/ch15
   build-depends:
       QuickCheck
     , base >=4.7 && <5

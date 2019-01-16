@@ -24,7 +24,12 @@ dependencies:
 - time
 
 library:
-  source-dirs: src
+  source-dirs:
+  - src
+  - src/ch8
+  - src/ch11
+  - src/ch14
+  - src/ch15
   exposed-modules:
   - Lib
   - E8
