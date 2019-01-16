@@ -1,4 +1,4 @@
-module Temp where
+module MonadVsApplicative where
 
 f :: Integer -> Maybe Integer
 f 0 = Nothing
