@@ -3,11 +3,12 @@ module ParseIP where
 import Text.ParserCombinators.ReadP
 import Control.Applicative
 import Data.Char
+import System.IO
 
 parseIP :: String -> Maybe (Int, Int, Int, Int)
 parseIP s = case readP_to_S ip s of
     [] -> Nothing
-    [(t,_)] -> Just t
+    xs -> Just (fst . last $ xs)
 
 ip :: ReadP (Int, Int, Int, Int)
 ip = do
@@ -22,17 +23,14 @@ ip = do
 
 subnet :: ReadP Int
 subnet = do
-    num <- numbers 1 <|> numbers 2 <|> numbers 3
-    if num > 255 then
+    text <- many1 $ satisfy isDigit
+    let number = read text
+    if number > 255 then
         pfail
     else
-        return num
+        return number
 
-numbers :: Int -> ReadP Int
-numbers digits = do
-    parse <- count digits digit
-    return $ read parse
-
-digit :: ReadP Char
-digit =
-    satisfy isDigit
+main = do
+    text <- getLine
+    print . parseIP $ text
+    main
