@@ -46,6 +46,7 @@ library:
   - text
   - hgrev
   - optparse-applicative
+  - aeson
 
 executables:
   learn-exe:

@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fd6f88dd378f5d1f81be1271a5567435cc2aee148967be699d01f13c831dc9f7
+-- hash: 0338fedb41801bea13e444560896911b2b95ae1cb81770d325dcf2a459a138a9
 
 name:           learn
 version:        0.1.0.0
@@ -44,6 +44,7 @@ library
       src/ch15
   build-depends:
       QuickCheck
+    , aeson
     , base >=4.7 && <5
     , checkers
     , hgrev
