@@ -47,6 +47,7 @@ library:
   - hgrev
   - optparse-applicative
   - aeson
+  - network
 
 executables:
   learn-exe:

@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0338fedb41801bea13e444560896911b2b95ae1cb81770d325dcf2a459a138a9
+-- hash: 9232efef0b60d1310d2d9e54f74462e372a2de57666ef9d1ce8d2aec452b13c3
 
 name:           learn
 version:        0.1.0.0
@@ -48,6 +48,7 @@ library
     , base >=4.7 && <5
     , checkers
     , hgrev
+    , network
     , optparse-applicative
     , scotty
     , text
