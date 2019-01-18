@@ -1,8 +1,10 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f93d4e18451d4454c881d900c9123eb865aa5a3ad55ae3f30ac4b425df2836a7
+-- hash: b382a5cd16afa29c6b39f8a63c9f5d9275eba97dd87daced55ccc68077c91f89
 
 name:           learn
 version:        0.1.0.0
@@ -15,10 +17,9 @@ copyright:      2018 Even Brenden
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
+    ChangeLog.md
 
 source-repository head
   type: git
