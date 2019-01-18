@@ -84,9 +84,15 @@ app rConn = do
         shawty <- liftIO shortyGen
         let shorty = BC.pack shawty
             uri' = encodeUtf8 (TL.toStrict uri)
-        resp <-
-          liftIO (saveURI rConn shorty uri')
-        html (shortyCreated resp shawty)
+        uri <- liftIO (getURI rConn shorty)
+        case uri of
+          Left reply ->
+            text (TL.pack (show reply))
+          Right mbBS -> case mbBS of
+            Nothing -> do
+              resp <- liftIO (saveURI rConn shorty uri')
+              html (shortyCreated resp shawty)
+            Just _ -> raise "We generated a shawty that already exists! Just refresh to try again."
       Nothing -> text (shortyAintUri uri)
   get "/:short" $ do
     short <- param "short"
