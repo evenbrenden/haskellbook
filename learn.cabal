@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ef75f7c170969d1bb94399c44c04afd77abc4fd6f831313e8dee8532bfe038a1
+-- hash: 6ccd4e75ae431b351cbb2a70dc1a4fecf2a2f104cd96ae693a82998b118d18b6
 
 name:           learn
 version:        0.1.0.0
@@ -47,7 +47,9 @@ library
     , base >=4.7 && <5
     , checkers
     , scotty
+    , text
     , time
+    , uuid
   default-language: Haskell2010
 
 executable learn-exe

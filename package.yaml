@@ -42,6 +42,8 @@ library:
   - QuickCheck
   - checkers
   - scotty
+  - uuid
+  - text
 
 executables:
   learn-exe:
