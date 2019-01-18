@@ -44,6 +44,8 @@ library:
   - scotty
   - uuid
   - text
+  - hgrev
+  - optparse-applicative
 
 executables:
   learn-exe:

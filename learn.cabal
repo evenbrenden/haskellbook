@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6ccd4e75ae431b351cbb2a70dc1a4fecf2a2f104cd96ae693a82998b118d18b6
+-- hash: fd6f88dd378f5d1f81be1271a5567435cc2aee148967be699d01f13c831dc9f7
 
 name:           learn
 version:        0.1.0.0
@@ -46,6 +46,8 @@ library
       QuickCheck
     , base >=4.7 && <5
     , checkers
+    , hgrev
+    , optparse-applicative
     , scotty
     , text
     , time
