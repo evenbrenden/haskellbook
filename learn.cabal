@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9232efef0b60d1310d2d9e54f74462e372a2de57666ef9d1ce8d2aec452b13c3
+-- hash: f93d4e18451d4454c881d900c9123eb865aa5a3ad55ae3f30ac4b425df2836a7
 
 name:           learn
 version:        0.1.0.0
@@ -46,10 +46,14 @@ library
       QuickCheck
     , aeson
     , base >=4.7 && <5
+    , bytestring
     , checkers
+    , hedis
     , hgrev
     , network
+    , network-uri
     , optparse-applicative
+    , random
     , scotty
     , text
     , time

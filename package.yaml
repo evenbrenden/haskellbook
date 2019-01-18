@@ -48,6 +48,10 @@ library:
   - optparse-applicative
   - aeson
   - network
+  - random
+  - bytestring
+  - hedis
+  - network-uri
 
 executables:
   learn-exe:
