@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b382a5cd16afa29c6b39f8a63c9f5d9275eba97dd87daced55ccc68077c91f89
+-- hash: 966e80eaf895c236cf2aced65a78e09f1a052641cd7cd9086f32c8be767845b6
 
 name:           learn
 version:        0.1.0.0
@@ -58,6 +58,7 @@ library
     , scotty
     , text
     , time
+    , turtle
     , uuid
   default-language: Haskell2010
 
