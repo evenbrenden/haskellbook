@@ -44,7 +44,7 @@ library:
   - scotty
   - uuid
   - text
-  - hgrev
+  # - hgrev
   - optparse-applicative
   - aeson
   - network
