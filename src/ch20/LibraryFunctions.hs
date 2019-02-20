@@ -1,4 +1,4 @@
-module E20 where
+module LibraryFunctions where
 
 import Data.Monoid
 
@@ -48,7 +48,7 @@ maximum :: (Foldable t, Ord a) => t a -> Maybe a
 maximum xs = getMaximum $ foldMapp (Maximum . Just) xs
 
 null :: (Foldable t) => t a -> Bool
-null x = E20.length x == 0
+null x = LibraryFunctions.length x == 0
 
 length :: (Foldable t) => t a -> Int
 length = foldr (\_ b -> b + 1) 0
