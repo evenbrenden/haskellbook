@@ -21,7 +21,6 @@ description:         http://haskellbook.com/
 
 dependencies:
 - base >= 4.7 && < 5
-- time
 
 library:
   source-dirs:
