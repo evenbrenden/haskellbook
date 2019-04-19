@@ -1,0 +1,3 @@
+module FizzbuzzDifferently where
+
+-- SKIPPED
