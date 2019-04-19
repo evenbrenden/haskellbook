@@ -29,6 +29,7 @@ library:
   - src/ch11
   - src/ch14
   - src/ch15
+  - src/ch23
   exposed-modules:
   - Lib
   - E8
@@ -36,6 +37,7 @@ library:
   - Fool
   - MonoidSemigroupHelpers
   - Optional
+  - WriteStateForYourself
   dependencies:
   - time
   - QuickCheck
