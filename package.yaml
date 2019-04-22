@@ -54,6 +54,8 @@ library:
   - hedis
   - network-uri
   - turtle
+  - trifecta
+  - parsers
 
 executables:
   learn-exe:
