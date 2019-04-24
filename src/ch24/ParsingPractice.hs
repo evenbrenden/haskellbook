@@ -3,7 +3,6 @@
 
 module ParsingPractice where
 
-import Text.Parser.Combinators
 import Text.Trifecta
 import Data.Maybe
 

@@ -55,7 +55,6 @@ library:
   - network-uri
   - turtle
   - trifecta
-  - parsers
 
 executables:
   learn-exe:

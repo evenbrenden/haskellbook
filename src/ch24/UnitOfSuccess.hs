@@ -1,6 +1,5 @@
 module UnitOfSuccess where
 
-import Text.Parser.Combinators
 import Text.Trifecta
 
 numberOnly :: Parser Integer
