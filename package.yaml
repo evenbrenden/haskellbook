@@ -55,6 +55,7 @@ library:
   - network-uri
   - turtle
   - trifecta
+  - integer-logarithms
 
 executables:
   learn-exe:
