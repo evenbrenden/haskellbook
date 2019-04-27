@@ -56,6 +56,9 @@ library:
   - turtle
   - trifecta
   - integer-logarithms
+  - containers
+  - raw-strings-qq
+  - hspec
 
 executables:
   learn-exe:
