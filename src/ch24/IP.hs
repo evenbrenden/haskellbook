@@ -23,26 +23,26 @@ instance Show IPv4 where
 octetsToWord32:: Int -> Int -> Int -> Int -> Word32
 octetsToWord32 d c b a = fromIntegral $ (d `shiftL` 24) .|. (c `shiftL` 16) .|. (b `shiftL` 8) .|. a
 
-ipv4 :: Parser IPv4
-ipv4 = do
-    octet4 <- subnet
-    char '.'
-    octet3 <- subnet
-    char '.'
-    octet2 <- subnet
-    char '.'
-    octet1 <- subnet
-    eof
-    return $ IPv4 (octetsToWord32 octet4 octet3 octet2 octet1)
-
-subnet :: Parser Int
+octet :: Parser Int
 -- https://stackoverflow.com/questions/36142078/how-to-signal-failure-in-trifecta-parser
-subnet = (<|> unexpected "Number does not fit an octet") $ try $ do
+octet = (<|> unexpected "Number does not fit an octet") $ try $ do
     number <- decimal
     if number <= 255 then
         return $ fromIntegral number
     else
         empty
+
+ipv4 :: Parser IPv4
+ipv4 = do
+    octet4 <- octet
+    char '.'
+    octet3 <- octet
+    char '.'
+    octet2 <- octet
+    char '.'
+    octet1 <- octet
+    eof
+    return $ IPv4 (octetsToWord32 octet4 octet3 octet2 octet1)
 
 pip4 = parseString ipv4 mempty
 
@@ -71,9 +71,6 @@ instance Show IPv6 where
 hextetsToWord64:: Int -> Int -> Int -> Int -> Word64
 hextetsToWord64 d c b a = fromIntegral $ (d `shiftL` 48) .|. (c `shiftL` 32) .|. (b `shiftL` 16) .|. a
 
-hexx :: String -> Int
-hexx = fst . head . readHex
-
 hextet :: Parser Int
 hextet = (<|> unexpected "Number does not fit a hextet") $ try $ do
     digits <- some hexDigit
@@ -82,6 +79,9 @@ hextet = (<|> unexpected "Number does not fit a hextet") $ try $ do
         return number
     else
         empty
+    where
+        hexx :: String -> Int
+        hexx = fst . head . readHex
 
 mergeHextets :: [Int] -> [Int] -> [Int]
 mergeHextets left right = left ++ (take numMissingZeros $ repeat 0) ++ right
