@@ -79,7 +79,7 @@ hextet = (<|> unexpected "Number does not fit a hextet") $ try $ do
     else
         empty
 
--- ...so we need this idiot helper
+-- ...so we need this lame preformatting
 addX :: String -> String
 addX xs = go xs "X"
     where
@@ -97,33 +97,26 @@ fillInZeros :: String -> String
 fillInZeros xs = go xs []
     where
         go [] ys = ys
-        go (_:[]) ys = ys
+        go (x1:[]) ys = ys ++ [x1]
         go (x1:x2:xs) ys =
-            if (x1 == ':' && x2 == ':') then
+            if ([x1] ++ [x2] == "::") then
                 go xs (ys ++ zeros ++ ":")
             else
-                go xs (ys ++ [x1] ++ [x2])
-        zeros = concat $ take (8 - (colonCount xs)) $ repeat ":0"
+                go (x2 : xs) (ys ++ [x1])
+        zeros = concat $ take (numMissingZeros xs) $ repeat ":0"
+        numMissingZeros = (-) 8 . colonCount
 
+-- Does not stop addresses with more than one "::" (though fillInZeros is likely that make that fail on # hextets)
 ipv6 :: Parser IPv6
-ipv6 = do
-    hextet8 <- hextet
-    char ':'
-    hextet7 <- hextet
-    char ':'
-    hextet6 <- hextet
-    char ':'
-    hextet5 <- hextet
-    char ':'
-    hextet4 <- hextet
-    char ':'
-    hextet3 <- hextet
-    char ':'
-    hextet2 <- hextet
-    char ':'
-    hextet1 <- hextet
+ipv6 = (<|> unexpected "Invalid IPv6 address") $ try $ do
+    hextets <- some $ hextet <* optional (char ':')
     eof
-    return $ IPv6 (hextetsToWord64 hextet8 hextet7 hextet6 hextet5) (hextetsToWord64 hextet4 hextet3 hextet2 hextet1)
+    if length hextets == 8 then
+        return $ IPv6
+            (hextetsToWord64 (hextets !! 0) (hextets !! 1) (hextets !! 2) (hextets !! 3))
+            (hextetsToWord64 (hextets !! 4) (hextets !! 5) (hextets !! 6) (hextets !! 7))
+    else
+        empty
 
 pip6 = parseString ipv6 mempty . addX . fillInZeros
 
