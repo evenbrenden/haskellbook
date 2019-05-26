@@ -120,5 +120,3 @@ main = do
         avgTimePerDay = fmap avgTime timeSpentDays
     putStrLn $ "Total time spent: " ++ show totalTime
     putStrLn $ "Average time spent per activity per day: " ++ show avgTimePerDay
-
--- Bonus points SKIPPED
