@@ -4,7 +4,7 @@ import Control.Applicative
 import Text.Trifecta
 import Data.Word
 import Data.Bits
-import Numeric (showHex)
+import Numeric (readHex, showHex)
 
 data IPv4 =
     IPv4 Word32
@@ -71,45 +71,33 @@ instance Show IPv6 where
 hextetsToWord64:: Int -> Int -> Int -> Int -> Word64
 hextetsToWord64 d c b a = fromIntegral $ (d `shiftL` 48) .|. (c `shiftL` 32) .|. (b `shiftL` 16) .|. a
 
+hexx :: String -> Int
+hexx = fst . head . readHex
+
 hextet :: Parser Int
 hextet = (<|> unexpected "Number does not fit a hextet") $ try $ do
-    number <- hexadecimal -- Needs an 'x' or 'X' prefix...
+    digits <- some hexDigit
+    let number = hexx digits
     if number <= 65536 then
-        return $ fromIntegral number
+        return number
     else
         empty
 
--- ...so we need this lame preformatting
-addX :: String -> String
-addX xs = go xs "X"
+mergeHextets :: [Int] -> [Int] -> [Int]
+mergeHextets left right = left ++ (take numMissingZeros $ repeat 0) ++ right
     where
-        go [] ys = ys
-        go (x:xs) ys =
-            if x == ':' then
-                go xs (ys ++ ":X")
+        numMissingZeros =
+            if (length right == 0) then
+                0 -- No "::" so left must have exactly 8 hextets
             else
-                go xs (ys ++ [x])
+                8 - (length left + length right)
 
-colonCount :: String -> Int
-colonCount = length . filter (\x -> x == ':')
-
-fillInZeros :: String -> String
-fillInZeros xs = go xs []
-    where
-        go [] ys = ys
-        go (x1:[]) ys = ys ++ [x1]
-        go (x1:x2:xs) ys =
-            if ([x1] ++ [x2] == "::") then
-                go xs (ys ++ zeros ++ ":")
-            else
-                go (x2 : xs) (ys ++ [x1])
-        zeros = concat $ take (numMissingZeros xs) $ repeat ":0"
-        numMissingZeros = (-) 8 . colonCount
-
--- Does not stop addresses with more than one "::" (though fillInZeros is likely that make that fail on # hextets)
 ipv6 :: Parser IPv6
 ipv6 = (<|> unexpected "Invalid IPv6 address") $ try $ do
-    hextets <- some $ hextet <* optional (char ':')
+    leftHextets <- some $ hextet <* optional (char ':')
+    optional (char ':') -- "::"
+    rightHextets <- many $ hextet <* optional (char ':')
+    let hextets = mergeHextets leftHextets rightHextets
     eof
     if length hextets == 8 then
         return $ IPv6
@@ -118,7 +106,7 @@ ipv6 = (<|> unexpected "Invalid IPv6 address") $ try $ do
     else
         empty
 
-pip6 = parseString ipv6 mempty . addX . fillInZeros
+pip6 = parseString ipv6 mempty
 
 convert :: IPv4 -> IPv6
 convert (IPv4 w32) = IPv6 0 (fromIntegral w32)
