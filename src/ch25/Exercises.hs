@@ -1,8 +1,6 @@
 {-# LANGUAGE InstanceSigs #-}
 
-module GOTCHA where
-
--- import Control.Applicative
+module Exercises where
 
 newtype Compose f g a =
     Compose { getCompose :: f (g a) }
@@ -12,6 +10,8 @@ instance (Functor f, Functor g)
     => Functor (Compose f g) where
     fmap f (Compose fga) =
         Compose $ (fmap . fmap) f fga
+
+-- GOTCHA! Exercise Time
 
 instance (Applicative f, Applicative g)
     => Applicative (Compose f g) where
@@ -24,7 +24,7 @@ instance (Applicative f, Applicative g)
     (Compose fgab) <*> (Compose fga) =
         Compose $ (fmap (<*>) fgab) <*> fga
 
--- Example:
+-- How I got there using an example:
 --
 -- [Just (+1)] <*> [Just 1] = [Just 2]
 -- fgab            fga        fgb
@@ -53,3 +53,17 @@ instance (Applicative f, Applicative g)
 --
 -- (fmap (<*>) [Just (+1)]) <*> [Just 1] = [Just 2]
 --             fgab             fga        fgb
+
+-- Compose Instances
+
+instance (Foldable f, Foldable g) =>
+          Foldable (Compose f g) where
+    foldMap f (Compose fga) =
+        (foldMap . foldMap) f fga
+
+instance (Traversable f, Traversable g) =>
+          Traversable (Compose f g) where
+    traverse f (Compose fga) =
+        fmap Compose $ (traverse . traverse) f fga
+
+-- And now for something completely different SKIPPED
