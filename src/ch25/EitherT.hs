@@ -1,6 +1,8 @@
 module EitherT where
 
 import Data.Either
+import Control.Monad
+import Control.Monad.Trans.Class
 
 newtype EitherT e m a =
     EitherT { runEitherT :: m (Either e a) }
@@ -51,3 +53,7 @@ eitherT amc bmc (EitherT amb) =
         case ab of
             Left a -> amc a
             Right b -> bmc b
+
+instance MonadTrans (EitherT e) where
+    -- lift :: (Monad m) => m a -> EitherT m a
+    lift = EitherT . liftM return
