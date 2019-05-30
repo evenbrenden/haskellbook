@@ -1,8 +1,11 @@
+{-# LANGUAGE InstanceSigs #-}
+
 module EitherT where
 
 import Data.Either
 import Control.Monad
 import Control.Monad.Trans.Class
+import Control.Monad.IO.Class
 
 newtype EitherT e m a =
     EitherT { runEitherT :: m (Either e a) }
@@ -23,9 +26,9 @@ instance (Monad m) => Monad (EitherT e m) where
 
     return = pure
 
-    -- (>>=) :: EitherT e m a
-    --       -> (a -> EitherT e m b)
-    --       -> EitherT e m b
+    (>>=) :: EitherT e m a
+          -> (a -> EitherT e m b)
+          -> EitherT e m b
     (EitherT em) >>= f =
         EitherT $ do
             v <- em
@@ -55,5 +58,10 @@ eitherT amc bmc (EitherT amb) =
             Right b -> bmc b
 
 instance MonadTrans (EitherT e) where
-    -- lift :: (Monad m) => m a -> EitherT m a
+    lift :: (Monad m) => m a -> EitherT e m a
     lift = EitherT . liftM return
+
+instance (MonadIO m)
+        => MonadIO (EitherT e m) where
+    liftIO :: IO a -> EitherT e m a
+    liftIO = lift . liftIO
