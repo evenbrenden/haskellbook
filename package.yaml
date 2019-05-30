@@ -59,6 +59,7 @@ library:
   - containers
   - raw-strings-qq
   - hspec
+  - transformers
 
 executables:
   learn-exe:
