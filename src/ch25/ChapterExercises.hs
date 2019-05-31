@@ -1,9 +1,12 @@
 module ChapterExercises where
 
+import Control.Monad
 import Control.Monad.Trans.Reader
 import Control.Monad.Trans.State
+import Control.Monad.Trans.Maybe
 import Control.Monad.Trans.Identity
 import Control.Monad.Trans.Class
+import Control.Monad.IO.Class
 
 -- Write the code
 
@@ -27,3 +30,27 @@ sPrintIncAccum :: (Num a, Show a)
 sPrintIncAccum = StateT $ \a -> do
     putStrLn $ "Hi: " <> show a
     return $ (show a, a + 1)
+
+-- Fix the code
+
+isValid :: String -> Bool
+isValid v = '!' `elem` v
+
+maybeExcite :: MaybeT IO String
+maybeExcite = do
+    v <- liftIO getLine
+    guard $ isValid v
+    return v
+
+doExcite :: IO ()
+doExcite = do
+    putStrLn "Say something excite!"
+    excite <- runMaybeT maybeExcite
+    case excite of
+        Nothing -> putStrLn "MOAR EXCITE PLS"
+        Just e ->
+            putStrLn ("Good, was very excite " ++ e)
+
+-- Hit counter SKIPPED
+
+-- Morra SKIPPED
