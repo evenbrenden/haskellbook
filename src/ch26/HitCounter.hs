@@ -4,6 +4,7 @@ module HitCounter where
 
 import Control.Monad.Trans.Class
 import Control.Monad.Trans.Reader
+import Control.Monad.IO.Class
 import Data.IORef
 import qualified Data.Map as M
 import Data.Maybe (fromMaybe)
@@ -33,27 +34,24 @@ app :: Scotty ()
 app =
     get "/:key" $ do
 
-        unprefixed <- param "key"
-
         -- Fetch config from the ReaderT context.
         config <- lift ask
 
-        -- Prepend prefix to key.
+        -- Prepend prefix from command line argument to key.
+        unprefixed <- param "key"
         let key' = mappend (prefix config) unprefixed
 
-        -- Get the IORef from IO context...
-        counts' <- lift . lift $ readIORef $ counts config
+        -- Run IO to read the reference, apply the bump and get updated copies.
+        let reference = counts config
+        let counts' = readIORef $ reference
+        let bumped = bumpBoomp key' <$> counts'
+        (updatedMap, updatedCount) <- liftIO bumped
 
-        -- ...make a copy with an updated count..
-        let bumped = bumpBoomp key' counts'
-
-        -- ...and write that back to IORef.
-        _ <- lift . lift $ writeIORef (counts config) (fst bumped)
-
-        let newInteger = snd bumped
+        -- Finally, run IO to write the updated copy of the map back to IORef.
+        liftIO $ writeIORef reference updatedMap
 
         html $
-            mconcat [ "<h1>Halloisen, ", key', " count is ", TL.pack $ show newInteger, "</h1>" ]
+            mconcat [ "<h1>", key', " has been visited ", TL.pack $ show updatedCount, " times.</h1>" ]
 
 main :: IO ()
 main = do
