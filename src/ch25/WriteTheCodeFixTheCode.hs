@@ -1,4 +1,4 @@
-module ChapterExercises where
+module WriteTheCodeFixTheCode where
 
 import Control.Monad
 import Control.Monad.Trans.Reader
@@ -50,7 +50,3 @@ doExcite = do
         Nothing -> putStrLn "MOAR EXCITE PLS"
         Just e ->
             putStrLn ("Good, was very excite " ++ e)
-
--- Hit counter SKIPPED
-
--- Morra SKIPPED
