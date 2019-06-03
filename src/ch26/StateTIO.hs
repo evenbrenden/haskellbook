@@ -1,7 +1,6 @@
 module StateTIO where
 
 import Control.Monad.Trans.State
-import Control.Monad.Trans.Except
 import Control.Monad.Trans.Class
 import Control.Monad.IO.Class
 import System.Random
@@ -20,13 +19,7 @@ roll = do
     where
         rollDice = getStdRandom (randomR (1 :: Eyes, 6 :: Eyes))
 
-check :: Eyes -> Money -> ExceptT String IO Money
-check sum money = ExceptT $ pure $
-                case sum == 7 || sum == 11 of
-                    True -> Right (2 * money)
-                    _ -> Left "...too bad!"
-
-anotherRound :: StateT Money (ExceptT String IO) ()
+anotherRound :: StateT Money IO ()
 anotherRound = do
         money <- get
         liftIO $ putStr $ mconcat [ "You're holding $", show money, ", hit it? (y/n) " ]
@@ -36,11 +29,15 @@ anotherRound = do
                 (dice1, dice2) <- liftIO roll
                 let sum = dice1 + dice2
                 liftIO $ putStr $ mconcat [ "Rolled ", dieString dice1 dice2 sum ]
-                newMoney <- lift $ check sum money
-                put newMoney
-                liftIO $ putStrLn "!"
-                anotherRound
-            "n" -> return ()
+                case sum == 7 || sum == 11 of
+                    True -> do
+                        modify (*2)
+                        liftIO $ putStrLn "!"
+                        anotherRound
+                    False -> do
+                        liftIO $ putStrLn $ mconcat [ ", too bad!" ]
+            "n" -> do
+                liftIO $ putStrLn $ mconcat [ "Got out at $", show money, " - smart!" ]
             _ -> do anotherRound
 
 main :: IO ()
@@ -55,7 +52,5 @@ main = do
     putStr "Place your bet ($): "
     bet' <- getLine
     let bet = read bet'
-    maybeMoney <- runExceptT $ execStateT anotherRound bet
-    case maybeMoney of
-        Right money -> putStrLn $ mconcat [ "Got out at $", show money, " - smart!" ]
-        Left nopeMessage -> putStrLn nopeMessage
+    execStateT anotherRound bet
+    return ()
