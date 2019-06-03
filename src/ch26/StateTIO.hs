@@ -1,15 +1,13 @@
 module StateTIO where
 
 import Control.Monad.Trans.State
-import Control.Monad.Trans.Class
+import Control.Monad.Trans.Except
 import Control.Monad.IO.Class
+import Control.Monad
 import System.Random
 
 type Money = Integer
 type Eyes = Integer
-
-dieString :: Eyes -> Eyes -> Eyes -> String
-dieString dice1 dice2 sum = mconcat [ show dice1, " + ", show dice2, " = ", show sum ]
 
 roll :: IO (Eyes, Eyes)
 roll = do
@@ -19,7 +17,12 @@ roll = do
     where
         rollDice = getStdRandom (randomR (1 :: Eyes, 6 :: Eyes))
 
-anotherRound :: StateT Money IO ()
+sevenOrEleven :: Eyes -> Eyes -> Bool
+sevenOrEleven dice1 dice2 = sum == 7 || sum == 11
+    where
+        sum = dice1 + dice2
+
+anotherRound :: StateT Money (ExceptT () IO) ()
 anotherRound = do
         money <- get
         liftIO $ putStr $ mconcat [ "You're holding $", show money, ", hit it? (y/n) " ]
@@ -27,17 +30,11 @@ anotherRound = do
         case hitMe of
             "y" -> do
                 (dice1, dice2) <- liftIO roll
-                let sum = dice1 + dice2
-                liftIO $ putStr $ mconcat [ "Rolled ", dieString dice1 dice2 sum ]
-                case sum == 7 || sum == 11 of
-                    True -> do
-                        modify (*2)
-                        liftIO $ putStrLn "!"
-                        anotherRound
-                    False -> do
-                        liftIO $ putStrLn $ mconcat [ ", too bad!" ]
-            "n" -> do
-                liftIO $ putStrLn $ mconcat [ "Got out at $", show money, " - smart!" ]
+                liftIO $ putStrLn $ mconcat [ "Rolled ", show dice1, " and ", show dice2 ]
+                guard (sevenOrEleven dice1 dice2)
+                modify (*2)
+                anotherRound
+            "n" -> return ()
             _ -> do anotherRound
 
 main :: IO ()
@@ -52,5 +49,7 @@ main = do
     putStr "Place your bet ($): "
     bet' <- getLine
     let bet = read bet'
-    execStateT anotherRound bet
-    return ()
+    outcome <- runExceptT $ execStateT anotherRound bet
+    case outcome of
+        Left _ -> putStrLn "It does say \"for idiots\"."
+        Right money -> putStrLn $ mconcat [ "Got out at $", show money, " - smart!" ]
