@@ -30,6 +30,7 @@ library:
   - src/ch14
   - src/ch15
   - src/ch23
+  - src/cipher
   exposed-modules:
   - Lib
   - E8
@@ -38,6 +39,7 @@ library:
   - MonoidSemigroupHelpers
   - Optional
   - WriteStateForYourself
+  - Cipher
   dependencies:
   - time
   - QuickCheck
