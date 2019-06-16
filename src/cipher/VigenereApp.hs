@@ -1,27 +1,32 @@
 module Vigenere where
 
-import qualified Cipher as C
-import System.Exit (exitSuccess)
-import System.IO
+import System.Exit (exitSuccess, exitFailure)
+import System.Environment (getArgs)
+import System.IO (hPutStr, hGetChar, stdout, stdin)
+import Cipher (vigenere, unVigenere)
 
-vigenere :: IO ()
-vigenere = do
-  hSetBuffering stdout NoBuffering
-  putStrLn $ "Vigenere!"
-  putStr $ "Word to encode: "
-  word <- getLine
-  putStr $ "Key for encoding your word: "
-  key <- getLine
-  putStrLn $ "Encoded word: " ++ (C.vigenere word key)
-  exitSuccess
+getLine' :: IO String
+getLine' = go ""
+    where
+        go line = do
+            input <- hGetChar stdin
+            case input of
+                '\n' -> return line
+                _   -> go $ line ++ [input]
 
-unVigenere :: IO ()
-unVigenere = do
-  hSetBuffering stdout NoBuffering
-  putStrLn $ "Un-Vigenere!"
-  putStr $ "Word to decode: "
-  word <- getLine
-  putStr $ "Key for decoding your word: "
-  key <- getLine
-  putStrLn $ "Decoded word: " ++ (C.unVigenere word key)
-  exitSuccess
+main :: IO ()
+main = do
+    [key, mode] <- getArgs
+    input <- getLine'
+    case mode of
+        "-e" -> do
+            hPutStr stdout $ vigenere input key
+            hPutStr stdout "\n"
+            exitSuccess
+        "-d" -> do
+            hPutStr stdout $ unVigenere input key
+            hPutStr stdout "\n"
+            exitSuccess
+        _    -> do
+            hPutStr stdout "Mode unknown\n"
+            exitFailure
