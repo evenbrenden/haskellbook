@@ -16,9 +16,11 @@ main :: IO ()
 main = do
     files <- listDirectory "."
     let inis = filter (isSuffixOf ".ini") files
-    handles <- mapM ((flip openFile) ReadMode) inis
-    contents <- mapM hGetContents handles
-    let parses = justGetTheConfig <$> contents
-    let mapped = Map.fromList $ zip inis parses
+    let tups :: [(FilePath, FilePath)]
+        tups = zipWith (,) inis inis
+    handles <- (mapM . mapM) ((flip openFile) ReadMode) tups
+    contents <- (mapM . mapM) hGetContents handles
+    let parses = (fmap . fmap) justGetTheConfig contents
+    let mapped = Map.fromList parses
     print mapped
-    mapM_ hClose handles
+    (mapM_ . mapM_) hClose handles
