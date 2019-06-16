@@ -1,4 +1,4 @@
-module ChapterExercises where
+module Chapter21Exercises where
 
 import Test.QuickCheck
 import Test.QuickCheck.Checkers

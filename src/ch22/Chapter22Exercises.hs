@@ -1,4 +1,4 @@
-module ChapterExercises where
+module Chapter22Exercises where
 
 import Control.Applicative
 import Data.Maybe

@@ -1,4 +1,4 @@
-module ChapterExercises where
+module Chapter20Exercises where
 
 import Data.Monoid
 

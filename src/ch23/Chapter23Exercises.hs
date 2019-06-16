@@ -1,4 +1,4 @@
-module ChapterExercises where
+module Chapter23Exercises where
 
 import WriteStateForYourself
 
