@@ -2,7 +2,7 @@ module Vigenere where
 
 import System.Exit (exitSuccess, exitFailure)
 import System.Environment (getArgs)
-import System.IO (hPutStr, hGetChar, stdout, stdin)
+import System.IO (hPutStr, hGetChar, hWaitForInput, stdout, stdin, stderr)
 import Cipher (vigenere, unVigenere)
 
 getLine' :: IO String
@@ -14,9 +14,8 @@ getLine' = go ""
                 '\n' -> return line
                 _   -> go $ line ++ [input]
 
-main :: IO ()
-main = do
-    [key, mode] <- getArgs
+doCipher :: String -> String -> IO ()
+doCipher key mode = do
     input <- getLine'
     case mode of
         "-e" -> do
@@ -30,3 +29,25 @@ main = do
         _    -> do
             hPutStr stdout "Mode unknown\n"
             exitFailure
+
+doCipherWithTimeout :: String -> String -> Int -> IO ()
+doCipherWithTimeout key mode timeout = do
+    madeItInTime <- hWaitForInput stdin timeout
+    if madeItInTime then
+        doCipher key mode
+    else do
+        hPutStr stderr "Timed out\n"
+        exitFailure
+
+main :: IO ()
+main = do
+    args <- getArgs
+    let [key, mode] = take 2 args
+    if length args == 3 then do
+        let timeout = read (args !! 2)
+        doCipherWithTimeout key mode timeout
+     else if length args == 2 then do
+        doCipher key mode
+    else do
+        hPutStr stderr "Too few or too many arguments\n"
+        exitFailure
