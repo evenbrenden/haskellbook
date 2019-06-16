@@ -30,6 +30,7 @@ library:
   - src/ch14
   - src/ch15
   - src/ch23
+  - src/ch24
   - src/cipher
   exposed-modules:
   - Lib
@@ -40,6 +41,7 @@ library:
   - Optional
   - WriteStateForYourself
   - Cipher
+  - ParsingConfigurationFiles
   dependencies:
   - time
   - QuickCheck
@@ -62,6 +64,7 @@ library:
   - raw-strings-qq
   - hspec
   - transformers
+  - directory
 
 executables:
   learn-exe:
