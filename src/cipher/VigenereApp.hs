@@ -1,4 +1,4 @@
-module Vigenere where
+module VigenereApp where
 
 import System.Exit (exitSuccess, exitFailure)
 import System.Environment (getArgs)
