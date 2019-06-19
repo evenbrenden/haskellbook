@@ -65,6 +65,7 @@ library:
   - hspec
   - transformers
   - directory
+  - vector
 
 executables:
   learn-exe:

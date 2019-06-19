@@ -1,0 +1,72 @@
+	Thu Jun 20 11:35 2019 Time and Allocation Profiling Report  (Final)
+
+	   UnboxedVector +RTS -hc -p -RTS
+
+	total time  =        8.84 secs   (8844 ticks @ 1000 us, 1 processor)
+	total alloc =  22,707,704 bytes  (excludes profiling overheads)
+
+COST CENTRE MODULE              SRC                              %time %alloc
+
+main        Main                UnboxedVector.hs:(11,1)-(12,37)  100.0   96.9
+showsPrec   Data.Vector.Unboxed Data/Vector/Unboxed.hs:248:3-25    0.0    1.4
+
+
+                                                                                                                                         individual      inherited
+COST CENTRE                  MODULE                            SRC                                                   no.      entries  %time %alloc   %time %alloc
+
+MAIN                         MAIN                              <built-in>                                             939          0    0.0    0.0   100.0  100.0
+ CAF                         Main                              <entire-module>                                       1877          0    0.0    0.0     0.0    2.9
+  main                       Main                              UnboxedVector.hs:(11,1)-(12,37)                       1878          1    0.0    0.0     0.0    1.5
+   showsPrec                 Data.Vector.Unboxed               Data/Vector/Unboxed.hs:248:3-25                       1880          1    0.0    1.4     0.0    1.5
+    unId                     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:25:21-24                   1913       1001    0.0    0.0     0.0    0.0
+    basicUnsafeIndexM        Data.Vector.Unboxed.Base          Data/Vector/Unboxed/Base.hs:211:480-535               1914       1000    0.0    0.0     0.0    0.1
+     basicUnsafeIndexM       Data.Vector.Primitive             Data/Vector/Primitive.hs:222:3-75                     1915       1000    0.0    0.1     0.0    0.1
+      indexByteArray#        Data.Primitive.Types              Data/Primitive/Types.hs:175:23-127                    1916       1000    0.0    0.0     0.0    0.0
+    basicLength              Data.Vector.Unboxed.Base          Data/Vector/Unboxed/Base.hs:211:367-406               1911          1    0.0    0.0     0.0    0.0
+     basicLength             Data.Vector.Primitive             Data/Vector/Primitive.hs:216:3-32                     1912          1    0.0    0.0     0.0    0.0
+  unboxed                    Main                              UnboxedVector.hs:8:1-30                               1881          1    0.0    0.5     0.0    1.4
+   >>=                       Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:36:3-18                    1897       2001    0.0    0.3     0.0    0.7
+    fmap                     Data.Vector.Fusion.Stream.Monadic Data/Vector/Fusion/Stream/Monadic.hs:(133,3)-(135,20) 1900       1001    0.0    0.3     0.0    0.5
+     basicUnsafeWrite        Data.Vector.Unboxed.Base          Data/Vector/Unboxed/Base.hs:210:842-900               1901       1000    0.0    0.0     0.0    0.2
+      basicUnsafeWrite       Data.Vector.Primitive.Mutable     Data/Vector/Primitive/Mutable.hs:115:3-69             1902       1000    0.0    0.2     0.0    0.2
+       primitive             Control.Monad.Primitive           Control/Monad/Primitive.hs:178:3-16                   1906          0    0.0    0.0     0.0    0.0
+        writeByteArray#      Data.Primitive.Types              Data/Primitive/Types.hs:175:130-196                   1907       1000    0.0    0.0     0.0    0.0
+   basicUnsafeSlice          Data.Vector.Unboxed.Base          Data/Vector/Unboxed/Base.hs:210:468-536               1903       1001    0.0    0.0     0.0    0.1
+    basicUnsafeSlice         Data.Vector.Primitive.Mutable     Data/Vector/Primitive/Mutable.hs:(85,3)-(86,25)       1904       1001    0.0    0.1     0.0    0.1
+   unId                      Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:25:21-24                   1896       1001    0.0    0.0     0.0    0.0
+   basicUnsafeFreeze         Data.Vector.Unboxed.Base          Data/Vector/Unboxed/Base.hs:211:229-296               1908          1    0.0    0.0     0.0    0.0
+    basicUnsafeFreeze        Data.Vector.Primitive             Data/Vector/Primitive.hs:(208,3)-(209,51)             1909          1    0.0    0.0     0.0    0.0
+     primitive               Control.Monad.Primitive           Control/Monad/Primitive.hs:178:3-16                   1910          1    0.0    0.0     0.0    0.0
+   basicUnsafeNew            Data.Vector.Unboxed.Base          Data/Vector/Unboxed/Base.hs:210:606-658               1886          1    0.0    0.0     0.0    0.0
+    basicUnsafeNew           Data.Vector.Primitive.Mutable     Data/Vector/Primitive/Mutable.hs:(96,3)-(102,37)      1887          1    0.0    0.0     0.0    0.0
+     basicUnsafeNew.mx       Data.Vector.Primitive.Mutable     Data/Vector/Primitive/Mutable.hs:102:7-37             1888          1    0.0    0.0     0.0    0.0
+     basicUnsafeNew.size     Data.Vector.Primitive.Mutable     Data/Vector/Primitive/Mutable.hs:101:7-36             1889          1    0.0    0.0     0.0    0.0
+      sizeOf                 Data.Primitive.Types              Data/Primitive/Types.hs:114:1-25                      1890          1    0.0    0.0     0.0    0.0
+       sizeOf#               Data.Primitive.Types              Data/Primitive/Types.hs:175:29-56                     1891          1    0.0    0.0     0.0    0.0
+        unI#                 Data.Primitive.Types              Data/Primitive/Types.hs:158:1-17                      1892          1    0.0    0.0     0.0    0.0
+     primitive               Control.Monad.Primitive           Control/Monad/Primitive.hs:178:3-16                   1894          1    0.0    0.0     0.0    0.0
+   sChunks                   Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:122:30-36        1895          1    0.0    0.0     0.0    0.0
+   sSize                     Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:124:30-34        1883          1    0.0    0.0     0.0    0.0
+   upperBound                Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30)    1882          1    0.0    0.0     0.0    0.0
+ CAF                         GHC.Conc.Signal                   <entire-module>                                       1034          0    0.0    0.0     0.0    0.0
+ CAF                         GHC.IO.Encoding                   <entire-module>                                       1016          0    0.0    0.0     0.0    0.0
+ CAF                         GHC.IO.Encoding.Iconv             <entire-module>                                       1014          0    0.0    0.0     0.0    0.0
+ CAF                         GHC.IO.Handle.FD                  <entire-module>                                       1005          0    0.0    0.2     0.0    0.2
+ CAF                         GHC.IO.Handle.Text                <entire-module>                                       1003          0    0.0    0.0     0.0    0.0
+ CAF:$fApplicativeBox_$cpure Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:45:3-6                     1866          0    0.0    0.0     0.0    0.0
+  pure                       Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:45:3-12                    1918          1    0.0    0.0     0.0    0.0
+ CAF:$fApplicativeId4        Data.Vector.Fusion.Util           <no location info>                                    1863          0    0.0    0.0     0.0    0.0
+  pure                       Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:31:3-11                    1899          1    0.0    0.0     0.0    0.0
+ CAF:$fMonadBox_$creturn     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:49:3-8                     1867          0    0.0    0.0     0.0    0.0
+  return                     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:49:3-15                    1917          1    0.0    0.0     0.0    0.0
+ CAF:$fMonadId1              Data.Vector.Fusion.Util           <no location info>                                    1865          0    0.0    0.0     0.0    0.0
+  return                     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:35:3-15                    1898          1    0.0    0.0     0.0    0.0
+ CAF:$fPrimMonadST1_r3Ox     Control.Monad.Primitive           <no location info>                                    1147          0    0.0    0.0     0.0    0.0
+  primitive                  Control.Monad.Primitive           Control/Monad/Primitive.hs:178:3-16                   1905          1    0.0    0.0     0.0    0.0
+ CAF:doInternalChecks        Data.Vector.Internal.Check        Data/Vector/Internal/Check.hs:71:1-16                 1870          0    0.0    0.0     0.0    0.0
+  doInternalChecks           Data.Vector.Internal.Check        Data/Vector/Internal/Check.hs:71:1-24                 1884          1    0.0    0.0     0.0    0.0
+ CAF:doUnsafeChecks          Data.Vector.Internal.Check        Data/Vector/Internal/Check.hs:64:1-14                 1869          0    0.0    0.0     0.0    0.0
+  doUnsafeChecks             Data.Vector.Internal.Check        Data/Vector/Internal/Check.hs:64:1-22                 1885          1    0.0    0.0     0.0    0.0
+ CAF:sIZEOF_INT              Data.Primitive.MachDeps           Data/Primitive/MachDeps.hs:71:1-10                    1116          0    0.0    0.0     0.0    0.0
+  sIZEOF_INT                 Data.Primitive.MachDeps           Data/Primitive/MachDeps.hs:71:1-14                    1893          1    0.0    0.0     0.0    0.0
+ main                        Main                              UnboxedVector.hs:(11,1)-(12,37)                       1879          0  100.0   96.9   100.0   96.9
