@@ -3,7 +3,7 @@ module TheUnbearableImprecisionOfTrying where
 import Control.Concurrent (threadDelay)
 import Control.Exception
 import Control.Monad (forever)
-import System.Random (randomRIO)
+import System.Random (randomIO)
 
 canICatch :: Exception e
           => e
@@ -13,16 +13,22 @@ canICatch e =
 
 randomException :: IO ()
 randomException = do
-    i <- randomRIO (1, 10 :: Int)
-    if i `elem` [1..9]
-        then throwIO DivideByZero
-        else throwIO StackOverflow
+    fiftyFifty <- randomIO :: IO Bool
+    case fiftyFifty of
+        True -> throwIO DivideByZero
+        False -> throwIO StackOverflow
+
+handleArith :: ArithException -> IO ()
+handleArith DivideByZero = putStr "Division by zero, but..."
+handleArith e = throwIO e
+
+handleAsync :: AsyncException -> IO ()
+handleAsync StackOverflow = putStr "Stack overflow, but..."
+handleAsync e = throwIO e
 
 main :: IO ()
 main = forever $ do
-    let tryS :: IO ()
-             -> IO (Either SomeException ())
-        tryS = try
-    _ <- tryS randomException
-    putStrLn "Live to loop another day!"
+    _ <- randomException `catches` [ Handler handleArith,
+                                     Handler handleAsync ]
+    putStrLn "...live to loop another day!"
     threadDelay (1 * 1000000)
