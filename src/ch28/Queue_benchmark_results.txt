@@ -1,0 +1,53 @@
+benchmarking alternating pushes and pops list
+time                 2.086 ms   (2.023 ms .. 2.159 ms)
+                     0.995 R²   (0.992 R² .. 0.998 iR²)
+mean                 2.046 ms   (2.020 ms .. 2.079 ms)
+std dev              99.51 μs   (74.44 μs .. 140.2 μs)
+variance introduced by outliers: 34% (moderately inflated)
+
+OK, how do we compare?
+
+benchmarking alternating pushes and pops queue
+time                 1.233 ms   (1.211 ms .. 1.262 ms)
+                     0.995 R²   (0.990 R² .. 0.999 R²)
+mean                 1.234 ms   (1.218 ms .. 1.255 ms)
+std dev              63.25 μs   (49.30 μs .. 93.69 μs)
+variance introduced by outliers: 40% (moderately inflated)
+
+Nice!
+
+benchmarking alternating pushes and pops sequence
+time                 905.6 μs   (870.4 μs .. 939.7 μs)
+                     0.994 R²   (0.990 R² .. 0.998 R²)
+mean                 890.0 μs   (876.8 μs .. 904.1 μs)
+std dev              46.10 μs   (37.21 μs .. 57.16 μs)
+variance introduced by outliers: 42% (moderately inflated)
+
+Dunno, probably super optimized.
+
+benchmarking pushes then pops list
+time                 5.709 ms   (5.423 ms .. 6.076 ms)
+                     0.978 R²   (0.962 R² .. 0.992 R²)
+mean                 5.714 ms   (5.584 ms .. 5.914 ms)
+std dev              494.1 μs   (365.2 μs .. 631.5 μs)
+variance introduced by outliers: 52% (severely inflated)
+
+OK, how do we compare?
+
+benchmarking pushes then pops queue
+time                 8.639 ms   (8.373 ms .. 8.890 ms)
+                     0.994 R²   (0.991 R² .. 0.997 R²)
+mean                 8.971 ms   (8.807 ms .. 9.202 ms)
+std dev              543.6 μs   (375.1 μs .. 763.3 μs)
+variance introduced by outliers: 30% (moderately inflated)
+
+Expected since list was just reversed.
+
+benchmarking pushes then pops sequence
+time                 4.417 ms   (4.269 ms .. 4.540 ms)
+                     0.996 R²   (0.994 R² .. 0.998 R²)
+mean                 4.243 ms   (4.190 ms .. 4.304 ms)
+std dev              173.3 μs   (141.0 μs .. 215.8 μs)
+variance introduced by outliers: 22% (moderately inflated)
+
+Marginally better than list, as expected.
