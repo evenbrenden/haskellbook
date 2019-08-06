@@ -1,3 +1,3 @@
-# Changelog for learn
+# Changelog for haskellbook
 
 ## Unreleased changes

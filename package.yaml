@@ -1,10 +1,10 @@
-name:                learn
+name:                haskellbook
 version:             0.1.0.0
-github:              "githubuser/learn"
+github:              "evenbrenden/haskellbook"
 license:             BSD3
 author:              "Even Brenden"
 maintainer:          "evenbrenden@gmail.com"
-copyright:           "2018 Even Brenden"
+copyright:           "2019 Even Brenden"
 
 extra-source-files:
 - README.md
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         http://haskellbook.com/
+description:         haskellbook.com
 
 dependencies:
 - base >= 4.7 && < 5
@@ -67,7 +67,7 @@ library:
   - vector
 
 executables:
-  learn-exe:
+  haskellbook-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -75,10 +75,10 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - learn
+    - haskellbook
 
 tests:
-  learn-test:
+  haskellbook-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -86,7 +86,7 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - learn
+    - haskellbook
     - hspec
     - hspec-discover
     - QuickCheck
