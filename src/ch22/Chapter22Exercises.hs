@@ -61,4 +61,4 @@ main = do
     print $ sequA (fromMaybe 0 s')
     print $ bolt (fromMaybe 0 ys)
 
--- Rewriting Shawty SKIPPED
+-- Rewriting Shawty PASS

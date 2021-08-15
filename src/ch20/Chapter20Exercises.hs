@@ -32,6 +32,6 @@ instance Foldable (Four' a) where
     foldMap f (Four' _ _ z w) = f z <> f w
     foldr f z0 (Four' _ _ z w) = f z (f w z0)
 
--- SKIPPED --
+-- PASS --
 filterF :: (Applicative f, Foldable t, Monoid (f a)) => (a -> Bool) -> t a -> f a
 filterF = undefined

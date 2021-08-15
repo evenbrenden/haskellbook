@@ -231,6 +231,6 @@ testBigger = quickBatch (traversable trigger)
         trigger :: Bigger (Int, Int, [Int]) (Int, Int, [Int])
         trigger = undefined
 
--- S SKIPPED
+-- S PASS
 
--- Instances for Tree SKIPPED
+-- Instances for Tree PASS

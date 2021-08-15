@@ -66,4 +66,4 @@ instance (Traversable f, Traversable g) =>
     traverse f (Compose fga) =
         fmap Compose $ (traverse . traverse) f fga
 
--- And now for something completely different SKIPPED
+-- And now for something completely different PASS
