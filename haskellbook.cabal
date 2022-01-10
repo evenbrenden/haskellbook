@@ -1,23 +1,15 @@
-cabal-version: 1.12
+cabal-version:          1.12
 
-name:           haskellbook
-version:        0.1.0.0
-description:    haskellbook.com
-homepage:       https://github.com/evenbrenden/haskellbook#readme
-bug-reports:    https://github.com/evenbrenden/haskellbook/issues
-author:         Even Brenden
-maintainer:     evenbrenden@gmail.com
-copyright:      2019 Even Brenden
-license:        BSD3
-license-file:   LICENSE
-build-type:     Simple
-extra-source-files:
-    README.md
-    ChangeLog.md
-
-source-repository head
-  type: git
-  location: https://github.com/evenbrenden/haskellbook
+name:                   haskellbook
+version:                0.1.0.0
+description:            haskellbook.com
+author:                 Even Brenden
+maintainer:             evenbrenden@gmail.com
+copyright:              2021 Even Brenden
+license:                BSD3
+license-file:           LICENSE
+build-type:             Simple
+extra-source-files:     README.md
 
 library
   exposed-modules:
@@ -46,7 +38,6 @@ library
       TryTry
       UnitOfSuccess
       VigenereApp
-      Paths_haskellbook
   hs-source-dirs:
       src
       src/ch8
@@ -83,10 +74,7 @@ library
 
 executable haskellbook-exe
   main-is: Main.hs
-  other-modules:
-      Paths_haskellbook
-  hs-source-dirs:
-      app
+  hs-source-dirs: app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
@@ -103,9 +91,7 @@ test-suite haskellbook-test
       MultiplicationSpec
       UsingQuickCheckSpec
       WordNumberSpec
-      Paths_haskellbook
-  hs-source-dirs:
-      test
+  hs-source-dirs: test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       QuickCheck
