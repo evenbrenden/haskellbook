@@ -1,0 +1,116 @@
+cabal-version: 1.12
+
+name:           haskellbook
+version:        0.1.0.0
+description:    haskellbook.com
+homepage:       https://github.com/evenbrenden/haskellbook#readme
+bug-reports:    https://github.com/evenbrenden/haskellbook/issues
+author:         Even Brenden
+maintainer:     evenbrenden@gmail.com
+copyright:      2019 Even Brenden
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/evenbrenden/haskellbook
+
+library
+  exposed-modules:
+      Lib
+      E8
+      E11
+      Fool
+      MonoidSemigroupHelpers
+      Optional
+      WriteStateForYourself
+      Cipher
+      ParsingConfigurationFiles
+  other-modules:
+      E15
+      MaybeAnotherMonoid
+      TestingQuickChecksPatience
+      Chapter23Exercises
+      FizzbuzzDifferently
+      RollYourOwn
+      Chapter24Exercises
+      IP
+      Log
+      ParsingPractice
+      SemVer
+      TelefonNummer
+      TryTry
+      UnitOfSuccess
+      VigenereApp
+      Paths_haskellbook
+  hs-source-dirs:
+      src
+      src/ch8
+      src/ch11
+      src/ch14
+      src/ch15
+      src/ch23
+      src/ch24
+      src/cipher
+  build-depends:
+      QuickCheck
+    , aeson
+    , base >=4.7 && <5
+    , bytestring
+    , checkers
+    , containers
+    , directory
+    , hedis
+    , hspec
+    , integer-logarithms
+    , network
+    , network-uri
+    , optparse-applicative
+    , random
+    , raw-strings-qq
+    , scotty
+    , text
+    , time
+    , transformers
+    , trifecta
+    , uuid
+    , vector
+  default-language: Haskell2010
+
+executable haskellbook-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_haskellbook
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , haskellbook
+  default-language: Haskell2010
+
+test-suite haskellbook-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      CipherSpec
+      FoolSpec
+      IdempotenceSpec
+      MultiplicationSpec
+      UsingQuickCheckSpec
+      WordNumberSpec
+      Paths_haskellbook
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+    , haskellbook
+    , hspec
+    , hspec-discover
+  default-language: Haskell2010
