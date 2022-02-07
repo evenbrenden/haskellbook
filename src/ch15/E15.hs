@@ -66,7 +66,7 @@ newtype Identity a = Identity a deriving (Eq, Show)
 instance Semigroup (Identity a) where
   x <> _ = x
 
-instance Arbitrary a => Arbitrary (Identity a)  where
+instance Arbitrary a => Arbitrary (Identity a) where
   arbitrary = fmap Identity arbitrary
 
 instance Monoid a => Monoid (Identity a) where
@@ -79,7 +79,7 @@ data Two a b = Two a b deriving (Eq, Show)
 instance (Semigroup a, Semigroup b) => Semigroup (Two a b) where
   (Two x y) <> (Two z w) = Two (x <> z) (y <> w)
 
-instance (Arbitrary a, Arbitrary b) => Arbitrary (Two a b)  where
+instance (Arbitrary a, Arbitrary b) => Arbitrary (Two a b) where
   arbitrary = do
     a <- arbitrary
     b <- arbitrary
@@ -95,7 +95,7 @@ data Three a b c = Three a b c deriving (Eq, Show)
 instance (Semigroup a, Semigroup b, Semigroup c) => Semigroup (Three a b c) where
   (Three x y z) <> (Three u v w) = Three (x <> u) (y <> v) (z <> w)
 
-instance (Arbitrary a, Arbitrary b, Arbitrary c) => Arbitrary (Three a b c)  where
+instance (Arbitrary a, Arbitrary b, Arbitrary c) => Arbitrary (Three a b c) where
   arbitrary = do
     a <- arbitrary
     b <- arbitrary
@@ -115,7 +115,7 @@ data Four a b c d = Four a b c d deriving (Eq, Show)
 instance (Semigroup a, Semigroup b, Semigroup c, Semigroup d) => Semigroup (Four a b c d) where
   (Four x y z p) <> (Four u v w q) = Four (x <> u) (y <> v) (z <> w) (p <> q)
 
-instance (Arbitrary a, Arbitrary b, Arbitrary c, Arbitrary d) => Arbitrary (Four a b c d)  where
+instance (Arbitrary a, Arbitrary b, Arbitrary c, Arbitrary d) => Arbitrary (Four a b c d) where
   arbitrary = do
     a <- arbitrary
     b <- arbitrary
@@ -177,7 +177,7 @@ instance Semigroup (Or a b) where
   Snd x <> Fst y = Snd x
   Snd x <> Snd y = Snd x
 
-instance (Arbitrary a, Arbitrary b) => Arbitrary (Or a b)  where
+instance (Arbitrary a, Arbitrary b) => Arbitrary (Or a b) where
   arbitrary = do
     a <- arbitrary
     b <- arbitrary
@@ -197,7 +197,7 @@ instance (Semigroup b) => Semigroup (Combine a b) where
 instance (Monoid b) => Monoid (Combine a b) where
   mempty = Combine mempty
 
-instance (CoArbitrary a, Arbitrary b) => Arbitrary (Combine a b)  where
+instance (CoArbitrary a, Arbitrary b) => Arbitrary (Combine a b) where
   arbitrary = do
     f <- arbitrary
     return $ Combine f
@@ -232,7 +232,7 @@ instance Semigroup (Comp a) where
 instance Monoid (Comp a) where
   mempty = Comp id
 
-instance (CoArbitrary a, Arbitrary a) => Arbitrary (Comp a)  where
+instance (CoArbitrary a, Arbitrary a) => Arbitrary (Comp a) where
   arbitrary = do
     a <- arbitrary
     return $ Comp a
@@ -265,7 +265,7 @@ instance Semigroup a =>
     (Failure' x) <> (Failure' y) = Failure' (x <> y)
     (Failure' x) <> (Success' y) = Success' y
 
-instance (Arbitrary a, Arbitrary b) => Arbitrary (Validation a b)  where
+instance (Arbitrary a, Arbitrary b) => Arbitrary (Validation a b) where
   arbitrary = do
     a <- arbitrary
     b <- arbitrary
@@ -288,14 +288,17 @@ validation = do
 
 newtype Mem s a =
   Mem {
-    runMem :: s -> (a,s)
+    runMem :: s -> (a, s)
   }
 
 instance Show (Mem s a) where
   show _ = "Mem"
 
 instance Semigroup a => Semigroup (Mem s a) where
-  x <> y = Mem $ \s -> (fst (runMem x s) <> fst (runMem y s), snd (runMem y (snd (runMem x s))))
+  x <> y = Mem $ \s ->
+    let newA = fst (runMem x s) <> fst (runMem y s)
+        newS = snd (runMem y (snd (runMem x s)))
+    in (newA, newS)
 
 instance Monoid a => Monoid (Mem s a) where
   mempty = Mem $ \s -> (mempty, s)
@@ -312,17 +315,8 @@ mem = do
   print $ rmleft == runMem f' 0
   print $ rmright == runMem f' 0
 
--- Prelude> mem
--- ("hi",1)
--- ("hi",1)
--- ("",0)
--- True
--- True
-
-instance (CoArbitrary a, Arbitrary a, CoArbitrary s, Arbitrary s) => Arbitrary (Mem s a)  where
-  arbitrary = do
-    f <- arbitrary
-    return $ Mem f
+instance (CoArbitrary a, Arbitrary a, CoArbitrary s, Arbitrary s) => Arbitrary (Mem s a) where
+  arbitrary = Mem <$> arbitrary
 
 semigroupAssocMem :: (Eq s, Eq a, Monoid a)
                   => Mem s a
