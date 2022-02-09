@@ -296,15 +296,17 @@ instance Show (Mem s a) where
 
 instance Semigroup a => Semigroup (Mem s a) where
   x <> y = Mem $ \s ->
-    let newA = fst (runMem x s) <> fst (runMem y s)
-        newS = snd (runMem y (snd (runMem x s)))
-    in (newA, newS)
+    let (a1, s1) = runMem x s
+        (a2, s2) = runMem y s1
+    in (a1 <> a2, s2)
 
 instance Monoid a => Monoid (Mem s a) where
   mempty = Mem $ \s -> (mempty, s)
 
+f' :: Mem Int String
 f' = Mem $ \s -> ("hi", s + 1)
 
+mem :: IO ()
 mem = do
   let rmzero = runMem mempty 0
       rmleft = runMem (f' <> mempty) 0
@@ -315,7 +317,7 @@ mem = do
   print $ rmleft == runMem f' 0
   print $ rmright == runMem f' 0
 
-instance (CoArbitrary a, Arbitrary a, CoArbitrary s, Arbitrary s) => Arbitrary (Mem s a) where
+instance (Arbitrary s, CoArbitrary s, Arbitrary a) => Arbitrary (Mem s a) where
   arbitrary = Mem <$> arbitrary
 
 semigroupAssocMem :: (Eq s, Eq a, Monoid a)
