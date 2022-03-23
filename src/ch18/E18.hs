@@ -24,7 +24,9 @@ instance Functor (Sum a) where
 
 instance Applicative (Sum a) where
   pure = Second
-  (<*>) = undefined
+  Second f <*> Second y = Second $ f y
+  Second x <*> First  y = First y
+  First  x <*> _ = First x
 
 instance Monad (Sum a) where
   return = pure
@@ -47,6 +49,7 @@ testSumTypes = undefined
 
 testSum = do
     quickBatch $ functor testSumTypes
+    quickBatch $ applicative testSumTypes
     quickBatch $ monad testSumTypes
 
 -- Chapter Exercises
