@@ -1,0 +1,31 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:haskellbook"
+
+    - path: "src/ch8"
+      component: "lib:haskellbook"
+
+    - path: "src/ch11"
+      component: "lib:haskellbook"
+
+    - path: "src/ch14"
+      component: "lib:haskellbook"
+
+    - path: "src/ch15"
+      component: "lib:haskellbook"
+
+    - path: "src/ch23"
+      component: "lib:haskellbook"
+
+    - path: "src/ch24"
+      component: "lib:haskellbook"
+
+    - path: "src/cipher"
+      component: "lib:haskellbook"
+
+    - path: "app/Main.hs"
+      component: "haskellbook:exe:haskellbook-exe"
+
+    - path: "test"
+      component: "haskellbook:test:haskellbook-test"
